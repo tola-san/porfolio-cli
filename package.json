@@ -1,6 +1,6 @@
 {
-  "name": "create-portfolio",
-  "version": "1.0.1",
+  "name": "@tolalumina/create-portfolio",
+  "version": "1.0.2",
   "description": "Create a polished, reusable developer portfolio in seconds.",
   "type": "module",
   "bin": {
@@ -13,7 +13,13 @@
   ],
   "scripts": {
     "test": "node --test --test-isolation=none",
-    "start": "node ./bin/cli.js"
+    "start": "node ./bin/cli.js",
+    "prepublishOnly": "npm test",
+    "publish:public": "npm publish --access public"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "engines": {
     "node": ">=20.9"
