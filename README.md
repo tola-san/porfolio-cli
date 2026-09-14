@@ -2,25 +2,25 @@
 
 **Generate a polished Next.js developer portfolio from your terminal in seconds.**
 
-
-
 ## ✨ What You Get
 
 * ⚡ **Modern stack** — Next.js App Router + TypeScript
+* 🌬️ **Tailwind CSS** — Utility-first styling is configured and ready to use
+* 🦸 **Heroicons** — Accessible React icons ready for buttons and links
 * 🎨 **Beautiful & responsive** — Carefully designed desktop and mobile layouts
-* 🧩 **Single config file** — Manage projects, skills, experience, biography, and social links in one place
+* 🧩 **Component-based** — Familiar React components that are easy to edit and extend
 * 🔒 **Privacy-first** — No personal information is hardcoded into the starter
 * 📱 **Mobile-ready** — Responsive across phones, tablets, and desktops
 * 🌙 **Clean design** — Professional UI out of the box
 * 🚀 **Ready to deploy** — Generate, customize, and ship
 
-Just edit:
+Start with:
 
 ```text
-portfolio.config.ts
+components/
 ```
 
-Replace the placeholder content with your own information and your portfolio is ready.
+Replace the placeholder content in each section and your portfolio is ready.
 
 ---
 
@@ -32,6 +32,14 @@ Create a new portfolio:
 npx @tolalumina/create-portfolio@latest my-portfolio
 ```
 
+Or launch the interactive setup:
+
+```bash
+npx @tolalumina/create-portfolio@latest
+```
+
+The interactive setup asks for a project name and whether dependencies should be installed.
+
 Or, if the CLI is installed locally:
 
 ```bash
@@ -42,6 +50,12 @@ Example:
 
 ```bash
 npx @tolalumina/create-portfolio@latest x-portfolio
+```
+
+Install dependencies automatically in non-interactive usage:
+
+```bash
+create-portfolio my-portfolio --install
 ```
 
 Then:
@@ -63,51 +77,22 @@ my-portfolio/
 ├── app/                    # Next.js App Router
 ├── components/             # Reusable UI components
 ├── public/                 # Images, icons, and static assets
-├── portfolio.config.ts     # Main portfolio configuration
 ├── package.json
 ├── tsconfig.json
 └── ...
 ```
 
-The main file you need to customize is:
+The page is assembled from small components:
 
 ```text
-portfolio.config.ts
+components/
+├── navbar.tsx
+├── hero.tsx
+├── projects.tsx
+├── about.tsx
+├── contact.tsx
+└── footer.tsx
 ```
-
----
-
-## 🧩 Portfolio Configuration
-
-Your personal content lives in one configuration file.
-
-Example:
-
-```ts
-export const portfolio = {
-  name: "Your Name",
-  role: "Full Stack Developer",
-
-  bio: "I build modern web applications.",
-
-  social: {
-    github: "",
-    linkedin: "",
-    email: ""
-  },
-
-  skills: [
-    "Next.js",
-    "TypeScript",
-    "React",
-    "Node.js"
-  ],
-
-  projects: []
-};
-```
-
-This keeps the UI components reusable and prevents personal information from being scattered throughout the project.
 
 ---
 
@@ -120,5 +105,6 @@ Next.js
 React
 TypeScript
 Tailwind CSS
+Heroicons
 Next.js App Router
 ```

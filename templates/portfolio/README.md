@@ -1,10 +1,10 @@
 # Developer Portfolio
 
-A clean, responsive Next.js portfolio generated with `create-portfolio`.
+A clean, responsive Next.js portfolio generated with `create-portfolio`, with Tailwind CSS and Heroicons ready to use.
 
 ## Customize
 
-Edit `portfolio.config.ts` to change your name, biography, projects, skills, experience, and social links. Adjust colors and typography in `app/globals.css` if you want a different visual direction.
+Edit the components in `components/` to add your name, biography, projects, skills, and links. `app/page.tsx` only composes the page sections, so each part is easy to find and change.
 
 ## Run locally
 

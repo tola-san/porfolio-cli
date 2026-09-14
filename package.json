@@ -1,6 +1,6 @@
 {
   "name": "create-portfolio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create a polished, reusable developer portfolio in seconds.",
   "type": "module",
   "bin": {
@@ -24,5 +24,12 @@
     "starter",
     "nextjs"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^7.10.1",
+    "chalk": "^5.6.2",
+    "execa": "^9.6.1",
+    "fs-extra": "^11.4.0",
+    "ora": "^8.2.0"
+  }
 }

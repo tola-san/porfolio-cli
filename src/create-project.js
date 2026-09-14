@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import fs from "fs-extra";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
@@ -18,6 +18,41 @@ const invalidWindowsNames = new Set([
   ...Array.from({ length: 9 }, (_, index) => `lpt${index + 1}`),
 ]);
 
+const excludedDirectories = new Set([
+  ".git",
+  ".next",
+  ".turbo",
+  "build",
+  "coverage",
+  "dist",
+  "node_modules",
+]);
+
+function shouldCopy(source) {
+  const name = path.basename(source);
+
+  if (excludedDirectories.has(name)) {
+    return false;
+  }
+
+  return name === ".env.example" || (name !== ".env" && !name.startsWith(".env."));
+}
+
+async function updatePackageName(filePath, projectName) {
+  if (!(await fs.pathExists(filePath))) {
+    return;
+  }
+
+  const packageData = await fs.readJson(filePath);
+  packageData.name = projectName;
+
+  if (packageData.packages?.[""]?.name) {
+    packageData.packages[""].name = projectName;
+  }
+
+  await fs.writeJson(filePath, packageData, { spaces: 2, EOL: "\n" });
+}
+// Validate the generated portfolio project name.
 export function validateProjectName(projectName) {
   if (typeof projectName !== "string" || projectName.trim() === "") {
     throw new Error("Project name is required.");
@@ -47,7 +82,7 @@ export function validateProjectName(projectName) {
   return projectName;
 }
 
-export function createProject(
+export async function createProject(
   projectName,
   { cwd = process.cwd(), templateDirectory = defaultTemplateDirectory } = {},
 ) {
@@ -58,48 +93,34 @@ export function createProject(
     `.${validProjectName}-${randomUUID()}.tmp`,
   );
 
-  if (fs.existsSync(targetDirectory)) {
+  if (await fs.pathExists(targetDirectory)) {
     throw new Error(`Directory "${validProjectName}" already exists.`);
   }
 
-  if (!fs.existsSync(templateDirectory)) {
+  if (!(await fs.pathExists(templateDirectory))) {
     throw new Error("Portfolio template could not be found.");
   }
 
   try {
-    fs.cpSync(templateDirectory, stagingDirectory, {
-      recursive: true,
+    await fs.copy(templateDirectory, stagingDirectory, {
       errorOnExist: true,
-      force: false,
-      filter(source) {
-        const name = path.basename(source);
-        return ![
-          ".git",
-          ".next",
-          "node_modules",
-          "dist",
-          "build",
-          ".env.local",
-        ].includes(name);
-      },
+      overwrite: false,
+      filter: shouldCopy,
     });
 
     const generatedPackagePath = path.join(stagingDirectory, "package.json");
-    const generatedPackage = JSON.parse(
-      fs.readFileSync(generatedPackagePath, "utf8"),
-    );
-    generatedPackage.name = validProjectName;
-    fs.writeFileSync(
-      generatedPackagePath,
-      `${JSON.stringify(generatedPackage, null, 2)}\n`,
+    await updatePackageName(generatedPackagePath, validProjectName);
+    await updatePackageName(
+      path.join(stagingDirectory, "package-lock.json"),
+      validProjectName,
     );
 
-    fs.renameSync(stagingDirectory, targetDirectory);
+    await fs.move(stagingDirectory, targetDirectory, { overwrite: false });
   } catch (error) {
-    if (fs.existsSync(stagingDirectory)) {
-      fs.rmSync(stagingDirectory, { recursive: true, force: true });
+    if (await fs.pathExists(stagingDirectory)) {
+      await fs.remove(stagingDirectory);
     }
-    if (fs.existsSync(targetDirectory)) {
+    if (await fs.pathExists(targetDirectory)) {
       throw new Error(`Directory "${validProjectName}" already exists.`);
     }
     throw new Error(`Could not create the portfolio: ${error.message}`);
