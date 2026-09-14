@@ -3,7 +3,7 @@
 **Generate a polished Next.js developer portfolio from your terminal in seconds.**
 
 ```bash
-npx create-portfolio@latest my-portfolio
+npx @tolalumina/create-portfolio@latest my-portfolio
 ```
 
 ## ✨ What You Get
