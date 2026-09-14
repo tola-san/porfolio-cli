@@ -1,12 +1,52 @@
-# create-portfolio
+# 🚀 create-portfolio
 
-Generate a polished Next.js developer portfolio from your terminal.
+**Generate a polished Next.js developer portfolio from your terminal in seconds.**
 
 ```bash
 npx create-portfolio@latest my-portfolio
 ```
 
-Then start the generated site:
+## ✨ What You Get
+
+* ⚡ **Modern stack** — Next.js App Router + TypeScript
+* 🎨 **Beautiful & responsive** — Carefully designed desktop and mobile layouts
+* 🧩 **Single config file** — Manage projects, skills, experience, biography, and social links in one place
+* 🔒 **Privacy-first** — No personal information is hardcoded into the starter
+* 📱 **Mobile-ready** — Responsive across phones, tablets, and desktops
+* 🌙 **Clean design** — Professional UI out of the box
+* 🚀 **Ready to deploy** — Generate, customize, and ship
+
+Just edit:
+
+```text
+portfolio.config.ts
+```
+
+Replace the placeholder content with your own information and your portfolio is ready.
+
+---
+
+## 📦 CLI Usage
+
+Create a new portfolio:
+
+```bash
+npx create-portfolio@latest my-portfolio
+```
+
+Or, if the CLI is installed locally:
+
+```bash
+create-portfolio <project-name>
+```
+
+Example:
+
+```bash
+create-portfolio my-portfolio
+```
+
+Then:
 
 ```bash
 cd my-portfolio
@@ -14,33 +54,73 @@ npm install
 npm run dev
 ```
 
-## What you get
+---
 
-- A responsive Next.js App Router portfolio written in TypeScript
-- Projects, skills, experience, biography, and social links in one configuration file
-- Carefully styled desktop and mobile layouts
-- No personal information hardcoded into the starter
+## 📁 Generated Project Structure
 
-Customize `portfolio.config.ts` inside the generated project, then replace the placeholder links and copy with your own.
-
-## CLI usage
+After generation:
 
 ```text
-create-portfolio <project-name>
-
-Options:
-  -h, --help       Show help
-  -v, --version    Show the version
+my-portfolio/
+├── app/                    # Next.js App Router
+├── components/             # Reusable UI components
+├── public/                 # Images, icons, and static assets
+├── portfolio.config.ts     # Main portfolio configuration
+├── package.json
+├── tsconfig.json
+└── ...
 ```
 
-Project names use lowercase letters, numbers, hyphens, underscores, or dots. The command refuses to overwrite an existing directory.
+The main file you need to customize is:
 
-## Local development
-
-```bash
-npm test
-npm link
-create-portfolio test-portfolio
+```text
+portfolio.config.ts
 ```
 
-Node.js 20.9 or newer is required.
+---
+
+## 🧩 Portfolio Configuration
+
+Your personal content lives in one configuration file.
+
+Example:
+
+```ts
+export const portfolio = {
+  name: "Your Name",
+  role: "Full Stack Developer",
+
+  bio: "I build modern web applications.",
+
+  social: {
+    github: "",
+    linkedin: "",
+    email: ""
+  },
+
+  skills: [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "Node.js"
+  ],
+
+  projects: []
+};
+```
+
+This keeps the UI components reusable and prevents personal information from being scattered throughout the project.
+
+---
+
+## 🛠 Tech Stack
+
+The generated portfolio uses:
+
+```text
+Next.js
+React
+TypeScript
+Tailwind CSS
+Next.js App Router
+```
