@@ -1,0 +1,28 @@
+{
+  "name": "create-portfolio",
+  "version": "1.0.0",
+  "description": "Create a polished, reusable developer portfolio in seconds.",
+  "type": "module",
+  "bin": {
+    "create-portfolio": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "templates"
+  ],
+  "scripts": {
+    "test": "node --test --test-isolation=none",
+    "start": "node ./bin/cli.js"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "keywords": [
+    "portfolio",
+    "cli",
+    "starter",
+    "nextjs"
+  ],
+  "license": "MIT"
+}
