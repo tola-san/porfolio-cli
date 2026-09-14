@@ -43,13 +43,13 @@ create-portfolio <project-name>
 Example:
 
 ```bash
-create-portfolio my-portfolio
+npx @tolalumina/create-portfolio@latest x-portfolio
 ```
 
 Then:
 
 ```bash
-cd my-portfolio
+cd x-portfolio
 npm install
 npm run dev
 ```
